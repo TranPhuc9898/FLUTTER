@@ -24,6 +24,7 @@ A few resources to get you started if this is your first Flutter project:
   "engines": {
     "npm": ">=18.17.0",
     "node": ">=16.4.0"
-  }
+  },
+  "notion": "https://jeweled-wolfberry-045.notion.site/FLUTTER-14-12-2023-9f8250fa02734d7cb9a9a4edde524b74"
 }
 ```

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/src/PokemonDetailScreen.dart';
 // import file people vào file main
 import 'package:my_app/src/people.dart';
+
+import 'package:my_app/src/pokemon.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,12 +16,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        onGenerateRoute: (settings) {
+          if (settings.name == '/PokemonDetailScreen') {
+            final value = settings.arguments as Pokemon;
+            return MaterialPageRoute(
+              builder: (_) => PokemonDetailScreen(selectedPokemon: value),
+            );
+          }
+          return null; // Let `onUnknownRoute` handle this behavior.
+        });
   }
 }
 
@@ -57,23 +68,28 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+
             if (_counter >= 6)
-              for (var person in people)
-                ListTile(
-                  leading: Image.network(person.picture),
-                  title: Text(person.name),
-                  onTap: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Scaffold(
-                          appBar: AppBar(),
-                          body: PersonDetail(person),
-                        ),
-                      ),
-                    ),
-                  },
-                ),
+              const Expanded(
+                child: PokemonScreen(),
+              ),
+            // for (var person in people)
+            //   ListTile(
+            //     leading: Image.network(person.picture),
+            //     title: Text(person.name),
+            //     onTap: () => {
+            //       Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //           builder: (context) => Scaffold(
+            //             appBar: AppBar(),
+            //             body: PersonDetail(person),
+            //           ),
+            //         ),
+            //       ),
+            //     },
+            //   ),
+            // Thêm PokemonScreen ở đây
           ],
         ),
       ),
